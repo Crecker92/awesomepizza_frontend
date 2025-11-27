@@ -1,0 +1,21 @@
+<div class="page">
+    <div class="toolbar">
+        <div class="toolbar__start">
+            <button mat-flat-button [disabled]="isLoadingOrders || isSavingNewOrder">Add Order</button>
+        </div>
+        <div class="toolbar__end">
+            <button mat-button (click)="logout()">Logout</button>
+        </div>
+    </div>
+    <main>
+        @if(isLoadingOrders) {
+        <mat-progress-spinner></mat-progress-spinner>
+        } @else {
+        @if (orders.length > 0) {
+        Hai degli ordini
+        } @else {
+        <span>You have not placed any orders yet!</span>
+        }
+        }
+    </main>
+</div>
