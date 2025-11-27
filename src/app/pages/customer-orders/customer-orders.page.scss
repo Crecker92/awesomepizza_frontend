@@ -8,3 +8,11 @@
     flex-wrap: wrap;
     margin-bottom: 1rem;
 }
+
+.order {
+    display: block;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}

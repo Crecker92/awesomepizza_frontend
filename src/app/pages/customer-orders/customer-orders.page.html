@@ -1,7 +1,8 @@
 <div class="page">
     <div class="toolbar">
         <div class="toolbar__start">
-            <button mat-flat-button [disabled]="isLoadingOrders || isSavingNewOrder">Add Order</button>
+            <button mat-flat-button [disabled]="isLoadingOrders" (click)="openAddOrderDialog()">Add
+                Order</button>
         </div>
         <div class="toolbar__end">
             <button mat-button (click)="logout()">Logout</button>
@@ -12,7 +13,9 @@
         <mat-progress-spinner></mat-progress-spinner>
         } @else {
         @if (orders.length > 0) {
-        Hai degli ordini
+        @for (order of orders; track $index) {
+        <ap-order [order]="order" class="order"></ap-order>
+        }
         } @else {
         <span>You have not placed any orders yet!</span>
         }

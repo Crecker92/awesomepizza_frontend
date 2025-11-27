@@ -1,0 +1,71 @@
+.order {
+    &__header {
+        display: grid;
+        grid-template-areas:
+            "code status"
+            "date status";
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__code {
+        grid-area: code;
+        font-size: .75rem;
+        color: #828282;
+    }
+
+    &__date {
+        grid-area: date;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    &__status {
+        grid-area: status;
+        text-align: right;
+        font-weight: bold;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-areas:
+            "name name name"
+            "price quantity total";
+        grid-template-columns: repeat(3, 1fr);
+        gap: .5rem;
+
+        @media screen and (min-width: 400px) {
+            grid-template-areas: "name name name name price quantity total";
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    &__item-name {
+        grid-area: name;
+    }
+
+    &__item-price {
+        grid-area: price;
+        color: #828282;
+        text-align: right;
+    }
+
+    &__item-quantity {
+        grid-area: quantity;
+        color: #828282;
+    }
+
+    &__item-total {
+        grid-area: total;
+        text-align: right;
+    }
+
+    &__total {
+        margin-top: 1rem;
+        text-align: right;
+    }
+}

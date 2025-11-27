@@ -1,0 +1,22 @@
+<mat-card class="order">
+    <mat-card-header class="order__header">
+        <div class="order__code">{{order.id}}</div>
+        <div class="order__date">Order placed on: {{order.createdAt | date:'medium'}}</div>
+        <div class="order__status" [ngClass]="'order__status--' + order.status">
+            <mat-chip>{{getStatus()}}</mat-chip>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        @for (item of order.items; track item.pizza.id) {
+        <div class="order__item">
+            <div class="order__item-name">{{item.pizza.name}}</div>
+            <div class="order__item-price">{{item.pizza.price | currency:'EUR' }}</div>
+            <div class="order__item-quantity">x{{item.quantity}}</div>
+            <div class="order__item-total">{{item.pizza.price * item.quantity | currency:'EUR'}}</div>
+        </div>
+        }
+        <div class="order__total">
+            <strong>Total: {{order.totalPrice | currency:'EUR'}}</strong>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,38 @@
+.pizza {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "name quantity"
+        "price quantity";
+    align-items: center;
+    padding: .25rem 0;
+
+    &__name {
+        grid-area: name;
+    }
+
+    &__price {
+        grid-area: price;
+    }
+
+    &__quantity {
+        grid-area: quantity;
+        display: flex;
+        align-items: center;
+    }
+
+    &__quantity-input {
+        width: 2rem;
+        height: 80%;
+        padding: .25rem;
+        margin: 0;
+        border: 0;
+        text-align: center;
+    }
+}
+
+.total {
+    display: flex;
+    font-size: 1rem;
+    margin-top: .5rem;
+}

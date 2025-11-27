@@ -25,6 +25,6 @@ export interface OrderItemInput {
 }
 
 export interface OrderInput {
-    items: OrderItemInput;
+    items: OrderItemInput[];
     notes?: string;
 }
