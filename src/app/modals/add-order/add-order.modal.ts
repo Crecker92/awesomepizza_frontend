@@ -1,14 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pizza } from '../../models/pizza.model';
 import { OrderService } from '../../services/order.service';
 import { OrderItemInput } from '../../models/order.model';
 import { finalize, tap } from 'rxjs';
-import { MatDialogContent, MatDialogTitle, MatDialogActions, MatDialogClose, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogContent, MatDialogTitle, MatDialogActions, MatDialogClose, MatDialogRef } from "@angular/material/dialog";
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
 import { PizzaService } from '../../services/pizza.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'ap-add-order',
@@ -27,6 +28,8 @@ export class AddOrderModal implements OnInit {
   constructor(
     private orderService: OrderService,
     private pizzaService: PizzaService,
+    private alertService: AlertService,
+    private dialogRef: MatDialogRef<AddOrderModal>
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,10 @@ export class AddOrderModal implements OnInit {
   private loadPizzas() {
     this.isLoadingPizzas = true;
     return this.pizzaService.getPizzas().pipe(
-      tap(pizzas => this.pizzas = pizzas),
+      tap({
+        next: pizzas => this.pizzas = pizzas,
+        error: () => this.alertService.openErrorAlert('Could not load the list of pizzas. Try again.')
+      }),
       finalize(() => this.isLoadingPizzas = false)
     );
   }
@@ -56,7 +62,12 @@ export class AddOrderModal implements OnInit {
     const items: OrderItemInput[] = Object.entries(this.selection)
       .filter(([_, quantity]) => quantity > 0)
       .map(([id, quantity]) => ({ id, quantity }));
-    this.addOrder(items).subscribe();
+    this.addOrder(items).pipe(
+      tap({
+        next: () => this.dialogRef.close('added'),
+        error: () => this.alertService.openErrorAlert("Could not place your order. Try again.")
+      })
+    ).subscribe();
   }
 
   private addOrder(items: OrderItemInput[], notes?: string) {

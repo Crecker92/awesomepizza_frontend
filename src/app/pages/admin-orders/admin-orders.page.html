@@ -1,1 +1,34 @@
-<p>admin-orders works!</p>
+<ap-page title="Orders Management" [showProgressBar]="isLoadingOrders || isChangingOrderStatus">
+    <button toolbar-button mat-button (click)="logout()">Logout</button>
+
+    @if(!isLoadingOrders) {
+    <section>
+        <h2>Current order:</h2>
+        @if (orderInProgress) {
+        <ap-order [order]="orderInProgress" [actions]="orderInProgressActions"></ap-order>
+        } @else {
+        <span>No order in progress!</span>
+        }
+    </section>
+
+    <section>
+        <h2>Orders queue:</h2>
+        @if(ordersQueue.length === 0) {
+        <span>There are not orders in the queue!</span>
+        }
+        @for (order of ordersQueue; track order.id) {
+        <ap-order [order]="order" [actions]="orderInQueueActions"></ap-order>
+        }
+    </section>
+
+    <section>
+        <h2>Completed orders:</h2>
+        @if(completedOrders.length === 0) {
+        <span>You have not completed any orders yet!</span>
+        }
+        @for (order of completedOrders; track order.id) {
+        <ap-order [order]="order"></ap-order>
+        }
+    </section>
+    }
+</ap-page>

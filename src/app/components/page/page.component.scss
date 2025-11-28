@@ -1,0 +1,28 @@
+.page {
+    padding: 1rem;
+
+    &__loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+
+        ::ng-deep button:not(:last-child) {
+            margin-right: .5rem;
+        }
+    }
+}

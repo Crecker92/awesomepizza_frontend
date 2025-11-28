@@ -1,12 +1,5 @@
-.page {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &__buttons {
-        text-align: center;
-    }
+.actions {
+    text-align: center;
 
     &__button {
         margin: .5rem;

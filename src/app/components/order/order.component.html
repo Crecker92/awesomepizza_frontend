@@ -19,4 +19,12 @@
             <strong>Total: {{order.totalPrice | currency:'EUR'}}</strong>
         </div>
     </mat-card-content>
+    @if (actions && actions.length > 0) {
+    <mat-card-actions>
+        @for (action of actions; track action.label) {
+        <button mat-flat-button (click)="action.handler(order)"
+            [disabled]="action.disabled(order)">{{action.label}}</button>
+        }
+    </mat-card-actions>
+    }
 </mat-card>

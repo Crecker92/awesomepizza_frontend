@@ -3,10 +3,11 @@ import { MatButton } from '@angular/material/button';
 import { Router } from "@angular/router";
 import { UserService } from '../../services/user.service';
 import { UserRole } from '../../models/user.model';
+import { PageComponent } from '../../components/page/page.component';
 
 @Component({
   selector: 'ap-home',
-  imports: [MatButton],
+  imports: [PageComponent, MatButton],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss'
 })

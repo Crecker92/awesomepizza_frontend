@@ -1,24 +1,15 @@
-<div class="page">
-    <div class="toolbar">
-        <div class="toolbar__start">
-            <button mat-flat-button [disabled]="isLoadingOrders" (click)="openAddOrderDialog()">Add
-                Order</button>
-        </div>
-        <div class="toolbar__end">
-            <button mat-button (click)="logout()">Logout</button>
-        </div>
-    </div>
-    <main>
-        @if(isLoadingOrders) {
-        <mat-progress-spinner></mat-progress-spinner>
-        } @else {
-        @if (orders.length > 0) {
-        @for (order of orders; track $index) {
-        <ap-order [order]="order" class="order"></ap-order>
-        }
-        } @else {
-        <span>You have not placed any orders yet!</span>
-        }
-        }
-    </main>
-</div>
+<ap-page title="Your Orders" [showProgressBar]="isLoadingOrders">
+    <button toolbar-button mat-flat-button [disabled]="isLoadingOrders" (click)="openAddOrderDialog()">Add
+        Order</button>
+    <button toolbar-button mat-button (click)="logout()">Logout</button>
+
+    @if (!isLoadingOrders) {
+    @if (orders.length > 0) {
+    @for (order of orders; track $index) {
+    <ap-order [order]="order" class="order"></ap-order>
+    }
+    } @else {
+    <span>You have not placed any orders yet!</span>
+    }
+    }
+</ap-page>

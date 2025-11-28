@@ -1,18 +1,20 @@
 import { Component, Input } from '@angular/core';
-import { Order, OrderStatus } from '../../models/order.model';
-import { MatCard, MatCardHeader, MatCardContent } from '@angular/material/card';
-import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
+import { Order, OrderAction, OrderStatus } from '../../models/order.model';
+import { MatCard, MatCardHeader, MatCardContent, MatCardActions } from '@angular/material/card';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { MatChip } from '@angular/material/chips';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'ap-order',
   imports: [CommonModule, MatCard, MatCardHeader, DatePipe, MatCardContent,
-    CurrencyPipe, MatChip],
+    CurrencyPipe, MatChip, MatCardActions, MatButton],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
 export class OrderComponent {
   @Input({ required: true }) order!: Order;
+  @Input() actions?: OrderAction[];
 
   getStatus() {
     const statuses: { [status in OrderStatus]: string } = {

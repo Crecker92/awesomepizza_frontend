@@ -8,15 +8,20 @@ export interface OrderItem {
     quantity: number;
 }
 
-export interface Order {
+export interface OrderRaw {
     id: string;
     customer: User;
     items: OrderItem[];
     status: OrderStatus;
     notes?: string;
+    createdAt: string;
+    updatedAt?: string;
+    totalPrice: number;
+}
+
+export interface Order extends Omit<OrderRaw, 'createdAt' | 'updatedAt'> {
     createdAt: Date;
     updatedAt?: Date;
-    totalPrice: number;
 }
 
 export interface OrderItemInput {
@@ -27,4 +32,10 @@ export interface OrderItemInput {
 export interface OrderInput {
     items: OrderItemInput[];
     notes?: string;
+}
+
+export interface OrderAction {
+    label: string;
+    handler: (order: Order) => unknown;
+    disabled: (order: Order) => boolean;
 }
