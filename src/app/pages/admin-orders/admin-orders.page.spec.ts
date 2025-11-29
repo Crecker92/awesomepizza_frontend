@@ -100,7 +100,7 @@ describe('AdminOrdersPage', () => {
     expect(component.completedOrders[0]).toBe(completedOrder);
   });
 
-  it('shoudl show alert on loading orders on init', () => {
+  it('should show alert on loading orders error on init', () => {
     const getOrdersSpy = spyOn(orderService, 'getOrders').and.returnValue(
       throwError(() => 'error')
     );
