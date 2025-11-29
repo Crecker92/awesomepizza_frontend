@@ -62,12 +62,10 @@ export class AddOrderModal implements OnInit {
     const items: OrderItemInput[] = Object.entries(this.selection)
       .filter(([_, quantity]) => quantity > 0)
       .map(([id, quantity]) => ({ id, quantity }));
-    this.addOrder(items).pipe(
-      tap({
-        next: () => this.dialogRef.close('added'),
-        error: () => this.alertService.openErrorAlert("Could not place your order. Try again.")
-      })
-    ).subscribe();
+    this.addOrder(items).subscribe({
+      next: () => this.dialogRef.close('added'),
+      error: () => this.alertService.openErrorAlert("Could not place your order. Try again.")
+    });
   }
 
   private addOrder(items: OrderItemInput[], notes?: string) {

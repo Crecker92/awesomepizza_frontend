@@ -136,7 +136,7 @@ describe('AdminOrdersPage', () => {
   it('should call service to set order in progress if no other orders in progress', () => {
     const resultOrders = [pendingOrder];
     spyOn(orderService, 'getOrders').and.returnValue(of(resultOrders));
-    const setInProgressSpy = spyOn(orderService, 'setOrderInProgress').and.stub();
+    const setInProgressSpy = spyOn(orderService, 'setOrderInProgress').and.returnValue(of(inProgressOrder));
 
     fixture.detectChanges();
 
@@ -189,7 +189,7 @@ describe('AdminOrdersPage', () => {
   it('should call service to set order completed if there one order in progress', () => {
     const resultOrders = [inProgressOrder];
     spyOn(orderService, 'getOrders').and.returnValue(of(resultOrders));
-    const setOrderCompletedSpy = spyOn(orderService, 'setOrderCompleted').and.stub();
+    const setOrderCompletedSpy = spyOn(orderService, 'setOrderCompleted').and.returnValue(of(completedOrder));
 
     fixture.detectChanges();
 
