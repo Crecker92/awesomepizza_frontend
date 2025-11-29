@@ -14,7 +14,7 @@
     <section>
         <h2>Orders queue:</h2>
         @if(ordersQueue.length === 0) {
-        <span>There are not orders in the queue!</span>
+        <span>There are no orders in the queue!</span>
         }
         @for (order of ordersQueue; track order.id) {
         <ap-order [order]="order" [actions]="orderInQueueActions"></ap-order>
