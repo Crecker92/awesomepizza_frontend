@@ -19,6 +19,7 @@ describe('OrderService', () => {
   const mockRawOrders: OrderRaw[] = [
     { id: '1', customer: mockUsers[0], items: [], status: 'pending', createdAt: new Date().toISOString(), updatedAt: undefined, totalPrice: 1 },
     { id: '2', customer: mockUsers[0], items: [], status: 'in-progress', createdAt: new Date().toISOString(), updatedAt: undefined, totalPrice: 2 },
+    { id: '3', customer: mockUsers[1], items: [], status: 'completed', createdAt: new Date().toISOString(), updatedAt: undefined, totalPrice: 3 },
   ];
 
   const mockOrders: Order[] = [
